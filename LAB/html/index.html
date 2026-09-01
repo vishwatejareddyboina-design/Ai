@@ -1,0 +1,2585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NeuroBot AI | NLP Chatbot Dashboard</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* =========================================
+           GLOBAL
+        ========================================= */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+         :root {
+            --bg-main: #0b1020;
+            --bg-sidebar: #10172a;
+            --bg-card: #151d33;
+            --bg-card-light: #1b2540;
+            --primary: #7c3aed;
+            --primary-light: #a78bfa;
+            --secondary: #06b6d4;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --pink: #ec4899;
+            --text-main: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
+            --shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+        
+        body {
+            font-family: "Inter", sans-serif;
+            background: radial-gradient( circle at 15% 15%, rgba(124, 58, 237, 0.15), transparent 30%), radial-gradient( circle at 85% 80%, rgba(6, 182, 212, 0.10), transparent 30%), var(--bg-main);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        button,
+        input {
+            font-family: inherit;
+        }
+        
+        button {
+            cursor: pointer;
+        }
+        /* =========================================
+           MAIN LAYOUT
+        ========================================= */
+        
+        .app {
+            display: flex;
+            min-height: 100vh;
+        }
+        /* =========================================
+           SIDEBAR
+        ========================================= */
+        
+        .sidebar {
+            width: 260px;
+            background: linear-gradient( 180deg, #11182d, #0d1325);
+            border-right: 1px solid var(--border);
+            padding: 25px 18px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 100;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 35px;
+        }
+        
+        .logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 23px;
+            background: linear-gradient( 135deg, var(--primary), var(--secondary));
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
+        }
+        
+        .brand h2 {
+            font-size: 18px;
+            font-weight: 800;
+        }
+        
+        .brand span {
+            font-size: 11px;
+            color: var(--secondary);
+            letter-spacing: 1px;
+        }
+        /* Navigation */
+        
+        .nav-title {
+            font-size: 10px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin: 12px 12px;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 13px 14px;
+            color: var(--text-secondary);
+            border-radius: 12px;
+            margin-bottom: 6px;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+        
+        .nav-item:hover {
+            background: rgba(124, 58, 237, 0.12);
+            color: white;
+        }
+        
+        .nav-item.active {
+            background: linear-gradient( 90deg, rgba(124, 58, 237, 0.35), rgba(6, 182, 212, 0.12));
+            color: white;
+            border-left: 3px solid var(--primary-light);
+        }
+        
+        .nav-item i {
+            width: 20px;
+            text-align: center;
+        }
+        /* Sidebar bottom */
+        
+        .sidebar-bottom {
+            margin-top: auto;
+        }
+        
+        .status-box {
+            background: rgba(34, 197, 94, 0.08);
+            border: 1px solid rgba(34, 197, 94, 0.18);
+            padding: 14px;
+            border-radius: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #86efac;
+        }
+        
+        .online-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--success);
+        }
+        
+        .version {
+            color: #64748b;
+            font-size: 10px;
+            margin-top: 6px;
+        }
+        /* =========================================
+           MAIN CONTENT
+        ========================================= */
+        
+        .main {
+            margin-left: 260px;
+            width: calc(100% - 260px);
+            padding: 25px 30px;
+        }
+        /* =========================================
+           TOP HEADER
+        ========================================= */
+        
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+        
+        .page-title h1 {
+            font-size: 27px;
+            font-weight: 800;
+            background: linear-gradient( 90deg, #ffffff, #a78bfa, #22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .page-title p {
+            margin-top: 6px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .icon-btn {
+            width: 42px;
+            height: 42px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: #cbd5e1;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+        
+        .icon-btn:hover {
+            color: white;
+            background: var(--bg-card-light);
+            transform: translateY(-2px);
+        }
+        
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: 10px;
+        }
+        
+        .profile-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient( 135deg, #ec4899, #8b5cf6);
+            font-weight: 700;
+        }
+        
+        .profile-info strong {
+            font-size: 12px;
+        }
+        
+        .profile-info span {
+            display: block;
+            color: #64748b;
+            font-size: 10px;
+            margin-top: 2px;
+        }
+        /* =========================================
+           STAT CARDS
+        ========================================= */
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+        
+        .stat-card {
+            background: linear-gradient( 145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(167, 139, 250, 0.3);
+        }
+        
+        .stat-card::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            right: -40px;
+            top: -40px;
+            background: var(--primary);
+            opacity: 0.07;
+        }
+        
+        .stat-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .stat-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+        }
+        
+        .purple {
+            background: rgba(124, 58, 237, 0.15);
+            color: #a78bfa;
+        }
+        
+        .cyan {
+            background: rgba(6, 182, 212, 0.15);
+            color: #22d3ee;
+        }
+        
+        .green {
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+        }
+        
+        .orange {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+        }
+        
+        .stat-number {
+            font-size: 27px;
+            font-weight: 800;
+            margin-top: 15px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+        
+        .growth {
+            font-size: 10px;
+            color: #4ade80;
+        }
+        /* =========================================
+           DASHBOARD GRID
+        ========================================= */
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1.8fr 1fr;
+            gap: 20px;
+        }
+        
+        .card {
+            background: linear-gradient( 145deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.015));
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-title i {
+            color: var(--secondary);
+        }
+        
+        .card-title h3 {
+            font-size: 14px;
+        }
+        
+        .card-title p {
+            font-size: 10px;
+            color: #64748b;
+            margin-top: 3px;
+        }
+        /* =========================================
+           CHAT
+        ========================================= */
+        
+        .chat-card {
+            height: 590px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-body {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+        
+        .chat-body::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+        .chat-body::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 10px;
+        }
+        /* Bot message */
+        
+        .message {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 18px;
+            animation: messageIn 0.3s ease;
+        }
+        
+        @keyframes messageIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .message.user {
+            flex-direction: row-reverse;
+        }
+        
+        .message-avatar {
+            width: 34px;
+            height: 34px;
+            flex-shrink: 0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+        }
+        
+        .bot-avatar {
+            background: linear-gradient( 135deg, var(--primary), var(--secondary));
+        }
+        
+        .user-avatar {
+            background: linear-gradient( 135deg, #ec4899, #f97316);
+        }
+        
+        .message-content {
+            max-width: 75%;
+        }
+        
+        .message-name {
+            font-size: 10px;
+            color: #64748b;
+            margin-bottom: 5px;
+        }
+        
+        .message.user .message-name {
+            text-align: right;
+        }
+        
+        .bubble {
+            padding: 12px 15px;
+            border-radius: 14px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        
+        .bot .bubble {
+            background: #18223b;
+            border-top-left-radius: 4px;
+            color: #dbeafe;
+        }
+        
+        .user .bubble {
+            background: linear-gradient( 135deg, #6d28d9, #7c3aed);
+            border-top-right-radius: 4px;
+            color: white;
+        }
+        /* =========================================
+           TYPING
+        ========================================= */
+        
+        .typing {
+            display: none;
+            align-items: center;
+            gap: 5px;
+            padding: 10px 15px;
+            width: fit-content;
+            background: #18223b;
+            border-radius: 12px;
+        }
+        
+        .typing span {
+            width: 6px;
+            height: 6px;
+            background: #94a3b8;
+            border-radius: 50%;
+            animation: typing 1s infinite;
+        }
+        
+        .typing span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes typing {
+            0%,
+            60%,
+            100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-5px);
+            }
+        }
+        /* =========================================
+           SUGGESTIONS
+        ========================================= */
+        
+        .suggestions {
+            display: flex;
+            gap: 7px;
+            padding: 0 18px 12px;
+            overflow-x: auto;
+        }
+        
+        .suggestion {
+            white-space: nowrap;
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.03);
+            color: #94a3b8;
+            font-size: 10px;
+            transition: 0.3s;
+        }
+        
+        .suggestion:hover {
+            color: white;
+            background: rgba(124, 58, 237, 0.2);
+            border-color: rgba(124, 58, 237, 0.4);
+        }
+        /* =========================================
+           CHAT INPUT
+        ========================================= */
+        
+        .chat-input-area {
+            padding: 15px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #0e162b;
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 7px 8px 7px 15px;
+            transition: 0.3s;
+        }
+        
+        .input-wrapper:focus-within {
+            border-color: rgba(124, 58, 237, 0.6);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.08);
+        }
+        
+        #messageInput {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: white;
+            font-size: 13px;
+        }
+        
+        #messageInput::placeholder {
+            color: #64748b;
+        }
+        
+        .send-btn {
+            width: 38px;
+            height: 38px;
+            border: none;
+            border-radius: 11px;
+            background: linear-gradient( 135deg, var(--primary), #9333ea);
+            color: white;
+            transition: 0.3s;
+        }
+        
+        .send-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+        }
+        /* =========================================
+           RIGHT PANEL
+        ========================================= */
+        
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .analytics-card {
+            padding-bottom: 20px;
+        }
+        
+        .chart {
+            height: 180px;
+            padding: 20px;
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+        }
+        
+        .bar-wrapper {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 7px;
+        }
+        
+        .bar {
+            width: 100%;
+            max-width: 28px;
+            border-radius: 7px 7px 3px 3px;
+            background: linear-gradient( 180deg, #8b5cf6, #06b6d4);
+            box-shadow: 0 5px 15px rgba(124, 58, 237, 0.2);
+            transition: 0.5s;
+        }
+        
+        .bar:hover {
+            filter: brightness(1.3);
+        }
+        
+        .day {
+            color: #64748b;
+            font-size: 9px;
+        }
+        /* =========================================
+           NLP ANALYSIS
+        ========================================= */
+        
+        .nlp-card {
+            padding: 20px;
+        }
+        
+        .nlp-item {
+            margin-bottom: 17px;
+        }
+        
+        .nlp-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            margin-bottom: 7px;
+            color: #cbd5e1;
+        }
+        
+        .progress {
+            height: 7px;
+            background: #0b1224;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.6s ease;
+        }
+        
+        .intent-bar {
+            width: 87%;
+            background: linear-gradient( 90deg, #7c3aed, #a78bfa);
+        }
+        
+        .sentiment-bar {
+            width: 72%;
+            background: linear-gradient( 90deg, #06b6d4, #22d3ee);
+        }
+        
+        .confidence-bar {
+            width: 94%;
+            background: linear-gradient( 90deg, #22c55e, #86efac);
+        }
+        
+        .entity-bar {
+            width: 65%;
+            background: linear-gradient( 90deg, #f59e0b, #fbbf24);
+        }
+        /* =========================================
+           INTENT TAGS
+        ========================================= */
+        
+        .intent-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 15px;
+        }
+        
+        .tag {
+            padding: 7px 10px;
+            border-radius: 8px;
+            font-size: 10px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.03);
+            color: #94a3b8;
+        }
+        
+        .tag.active {
+            color: #c4b5fd;
+            background: rgba(124, 58, 237, 0.12);
+            border-color: rgba(124, 58, 237, 0.3);
+        }
+        /* =========================================
+           FEATURES
+        ========================================= */
+        
+        .feature-list {
+            padding: 18px 20px;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+        
+        .feature:last-child {
+            margin-bottom: 0;
+        }
+        
+        .feature-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.04);
+            color: #a78bfa;
+        }
+        
+        .feature-text strong {
+            display: block;
+            font-size: 11px;
+        }
+        
+        .feature-text span {
+            font-size: 9px;
+            color: #64748b;
+        }
+        /* =========================================
+           TOAST
+        ========================================= */
+        
+        .toast {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            background: #18223b;
+            border: 1px solid var(--border);
+            padding: 13px 17px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            font-size: 12px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: 0.4s;
+            z-index: 1000;
+        }
+        
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+        
+        @media (max-width: 1100px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 800px) {
+            .sidebar {
+                width: 75px;
+                padding: 20px 10px;
+            }
+            .brand-text,
+            .nav-item span,
+            .nav-title,
+            .status-box,
+            .version {
+                display: none;
+            }
+            .brand {
+                justify-content: center;
+            }
+            .nav-item {
+                justify-content: center;
+            }
+            .main {
+                margin-left: 75px;
+                width: calc(100% - 75px);
+                padding: 20px;
+            }
+            .profile-info {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            .main {
+                padding: 15px;
+            }
+            .page-title h1 {
+                font-size: 20px;
+            }
+            .header-actions .icon-btn {
+                display: none;
+            }
+            .chat-card {
+                height: 600px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <div class="app">
+
+
+        <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+        <aside class="sidebar">
+
+            <div class="brand">
+
+                <div class="logo">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+
+                <div class="brand-text">
+                    <h2>NeuroBot</h2>
+                    <span>NLP INTELLIGENCE</span>
+                </div>
+
+            </div>
+
+
+            <div class="nav-title">
+                Workspace
+            </div>
+
+            <div class="nav-item active">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Dashboard</span>
+            </div>
+
+            <div class="nav-item">
+                <i class="fa-solid fa-comments"></i>
+                <span>Conversations</span>
+            </div>
+
+            <div class="nav-item">
+                <i class="fa-solid fa-microchip"></i>
+                <span>NLP Engine</span>
+            </div>
+
+            <div class="nav-item">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Analytics</span>
+            </div>
+
+
+            <div class="nav-title">
+                Management
+            </div>
+
+            <div class="nav-item">
+                <i class="fa-solid fa-database"></i>
+                <span>Knowledge Base</span>
+            </div>
+
+            <div class="nav-item">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </div>
+
+
+            <div class="sidebar-bottom">
+
+                <div class="status-box">
+
+                    <div class="status">
+                        <span class="online-dot"></span> NLP Engine Online
+                    </div>
+
+                    <div class="version">
+                        Neural Model v2.4.1
+                    </div>
+
+                </div>
+
+                <div class="nav-item">
+
+                    <i class="fa-solid fa-circle-question"></i>
+
+                    <span>
+                    Help Center
+                </span>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+
+        <!-- =========================================
+         MAIN
+    ========================================== -->
+
+        <main class="main">
+
+
+            <!-- TOP BAR -->
+
+            <header class="topbar">
+
+                <div class="page-title">
+
+                    <h1>NLP Chatbot Dashboard</h1>
+
+                    <p>
+                        Natural Language Processing & Conversational AI
+                    </p>
+
+                </div>
+
+
+                <div class="header-actions">
+
+                    <button class="icon-btn" onclick="showToast('No new notifications')" title="Notifications">
+                    <i class="fa-regular fa-bell"></i>
+                </button>
+
+                    <button class="icon-btn" onclick="exportChat()" title="Export Chat">
+                    <i class="fa-solid fa-download"></i>
+                </button>
+
+                    <button class="icon-btn" onclick="clearChat()" title="Clear Chat">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+
+
+                    <div class="profile">
+
+                        <div class="profile-avatar">
+                            DK
+                        </div>
+
+                        <div class="profile-info">
+
+                            <strong>
+                            AI Student
+                        </strong>
+
+                            <span>
+                            Administrator
+                        </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+
+            <!-- =========================================
+             STATISTICS
+        ========================================== -->
+
+            <section class="stats">
+
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon purple">
+                            <i class="fa-solid fa-message"></i>
+                        </div>
+
+                        <span class="growth">
+                        +18.4%
+                    </span>
+
+                    </div>
+
+                    <div class="stat-number" id="totalMessages">
+                        128
+                    </div>
+
+                    <div class="stat-label">
+                        Total Messages
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon cyan">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+
+                        <span class="growth">
+                        +12.7%
+                    </span>
+
+                    </div>
+
+                    <div class="stat-number">
+                        42
+                    </div>
+
+                    <div class="stat-label">
+                        Active Sessions
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon green">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+
+                        <span class="growth">
+                        +4.2%
+                    </span>
+
+                    </div>
+
+                    <div class="stat-number">
+                        94.6%
+                    </div>
+
+                    <div class="stat-label">
+                        NLP Accuracy
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon orange">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+
+                        <span class="growth">
+                        -8.3%
+                    </span>
+
+                    </div>
+
+                    <div class="stat-number">
+                        1.8s
+                    </div>
+
+                    <div class="stat-label">
+                        Avg. Response Time
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =========================================
+             DASHBOARD GRID
+        ========================================== -->
+
+            <section class="dashboard-grid">
+
+
+                <!-- =====================================
+                 CHATBOT
+            ====================================== -->
+
+                <div class="card chat-card">
+
+
+                    <div class="card-header">
+
+                        <div class="card-title">
+
+                            <i class="fa-solid fa-robot"></i>
+
+                            <div>
+
+                                <h3>
+                                    AI Conversation
+                                </h3>
+
+                                <p>
+                                    Powered by NLP intent recognition
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="status">
+
+                            <span class="online-dot"></span> Online
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CHAT MESSAGES -->
+
+                    <div class="chat-body" id="chatBody">
+
+
+                        <div class="message bot">
+
+                            <div class="message-avatar bot-avatar">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+
+                            <div class="message-content">
+
+                                <div class="message-name">
+                                    NeuroBot • AI Assistant
+                                </div>
+
+                                <div class="bubble">
+
+                                    👋 Hello! I'm <b>NeuroBot</b>, your NLP-powered virtual assistant.
+
+                                    <br><br> I can understand questions about
+                                    <b>college, technology, AI, Python,
+                                projects, greetings</b> and more.
+
+                                    <br><br> How can I help you today?
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- TYPING INDICATOR -->
+
+                    <div class="message" id="typingMessage" style="display:none;">
+
+                        <div class="message-avatar bot-avatar">
+
+                            <i class="fa-solid fa-robot"></i>
+
+                        </div>
+
+                        <div class="typing">
+
+                            <span></span>
+                            <span></span>
+                            <span></span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- QUICK SUGGESTIONS -->
+
+                    <div class="suggestions">
+
+                        <button class="suggestion" onclick="quickMessage('What is NLP?')">
+                        🧠 What is NLP?
+                    </button>
+
+                        <button class="suggestion" onclick="quickMessage('Tell me about Python')">
+                        🐍 Python
+                    </button>
+
+                        <button class="suggestion" onclick="quickMessage('What can you do?')">
+                        🤖 Capabilities
+                    </button>
+
+                        <button class="suggestion" onclick="quickMessage('How are you?')">
+                        😊 How are you?
+                    </button>
+
+                    </div>
+
+
+
+                    <!-- INPUT -->
+
+                    <div class="chat-input-area">
+
+                        <div class="input-wrapper">
+
+                            <input type="text" id="messageInput" placeholder="Type your message..." autocomplete="off">
+
+                            <button class="send-btn" onclick="sendMessage()">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =====================================
+                 RIGHT COLUMN
+            ====================================== -->
+
+                <div class="right-column">
+
+
+                    <!-- ANALYTICS -->
+
+                    <div class="card analytics-card">
+
+                        <div class="card-header">
+
+                            <div class="card-title">
+
+                                <i class="fa-solid fa-chart-column"></i>
+
+                                <div>
+
+                                    <h3>
+                                        Conversation Analytics
+                                    </h3>
+
+                                    <p>
+                                        Messages processed this week
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="chart">
+
+                            <div class="bar-wrapper">
+                                <div class="bar" style="height:45%"></div>
+                                <span class="day">MON</span>
+                            </div>
+
+                            <div class="bar-wrapper">
+                                <div class="bar" style="height:62%"></div>
+                                <span class="day">TUE</span>
+                            </div>
+
+                            <div class="bar-wrapper">
+                                <div class="bar" style="height:50%"></div>
+                                <span class="day">WED</span>
+                            </div>
+
+                            <div class="bar-wrapper">
+                                <div class="bar" style="height:78%"></div>
+                                <span class="day">THU</span>
+                            </div>
+
+                            <div class="bar-wrapper">
+                                <div class="bar" style="height:65%"></div>
+                                <span class="day">FRI</span>
+                            </div>
+
+                            <div class="bar-wrapper">
+                                <div class="bar" style="height:88%"></div>
+                                <span class="day">SAT</span>
+                            </div>
+
+                            <div class="bar-wrapper">
+                                <div class="bar" style="height:72%"></div>
+                                <span class="day">SUN</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- NLP ANALYSIS -->
+
+                    <div class="card">
+
+                        <div class="card-header">
+
+                            <div class="card-title">
+
+                                <i class="fa-solid fa-brain"></i>
+
+                                <div>
+
+                                    <h3>
+                                        NLP Analysis
+                                    </h3>
+
+                                    <p>
+                                        Real-time language understanding
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="nlp-card">
+
+
+                            <div class="nlp-item">
+
+                                <div class="nlp-label">
+
+                                    <span>
+                                    Intent Detection
+                                </span>
+
+                                    <strong>
+                                    87%
+                                </strong>
+
+                                </div>
+
+                                <div class="progress">
+
+                                    <div class="progress-bar intent-bar"></div>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="nlp-item">
+
+                                <div class="nlp-label">
+
+                                    <span>
+                                    Sentiment Analysis
+                                </span>
+
+                                    <strong>
+                                    72%
+                                </strong>
+
+                                </div>
+
+                                <div class="progress">
+
+                                    <div class="progress-bar sentiment-bar"></div>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="nlp-item">
+
+                                <div class="nlp-label">
+
+                                    <span>
+                                    Confidence Score
+                                </span>
+
+                                    <strong>
+                                    94%
+                                </strong>
+
+                                </div>
+
+                                <div class="progress">
+
+                                    <div class="progress-bar confidence-bar"></div>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="nlp-item">
+
+                                <div class="nlp-label">
+
+                                    <span>
+                                    Entity Recognition
+                                </span>
+
+                                    <strong>
+                                    65%
+                                </strong>
+
+                                </div>
+
+                                <div class="progress">
+
+                                    <div class="progress-bar entity-bar"></div>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="intent-list">
+
+                                <span class="tag active">
+                                Greeting
+                            </span>
+
+                                <span class="tag">
+                                Question
+                            </span>
+
+                                <span class="tag">
+                                Technology
+                            </span>
+
+                                <span class="tag">
+                                Education
+                            </span>
+
+                                <span class="tag">
+                                Support
+                            </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- FEATURES -->
+
+                    <div class="card">
+
+                        <div class="card-header">
+
+                            <div class="card-title">
+
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                                <div>
+
+                                    <h3>
+                                        NLP Features
+                                    </h3>
+
+                                    <p>
+                                        Active processing modules
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="feature-list">
+
+
+                            <div class="feature">
+
+                                <div class="feature-icon">
+                                    <i class="fa-solid fa-language"></i>
+                                </div>
+
+                                <div class="feature-text">
+
+                                    <strong>
+                                    Tokenization
+                                </strong>
+
+                                    <span>
+                                    Breaking text into tokens
+                                </span>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="feature">
+
+                                <div class="feature-icon">
+                                    <i class="fa-solid fa-filter"></i>
+                                </div>
+
+                                <div class="feature-text">
+
+                                    <strong>
+                                    Text Processing
+                                </strong>
+
+                                    <span>
+                                    Cleaning & normalization
+                                </span>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="feature">
+
+                                <div class="feature-icon">
+                                    <i class="fa-solid fa-face-smile"></i>
+                                </div>
+
+                                <div class="feature-text">
+
+                                    <strong>
+                                    Sentiment Analysis
+                                </strong>
+
+                                    <span>
+                                    Positive / negative detection
+                                </span>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="feature">
+
+                                <div class="feature-icon">
+                                    <i class="fa-solid fa-bullseye"></i>
+                                </div>
+
+                                <div class="feature-text">
+
+                                    <strong>
+                                    Intent Recognition
+                                </strong>
+
+                                    <span>
+                                    Understanding user intention
+                                </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+
+    <!-- TOAST -->
+
+    <div class="toast" id="toast">
+        Action completed
+    </div>
+
+
+
+    <script>
+        /* =========================================
+                               GLOBAL VARIABLES
+                            ========================================== */
+
+        let messageCount = 128;
+
+        const input =
+            document.getElementById("messageInput");
+
+        const chatBody =
+            document.getElementById("chatBody");
+
+        const totalMessages =
+            document.getElementById("totalMessages");
+
+
+        /* =========================================
+           NLP KNOWLEDGE BASE
+        ========================================== */
+
+        const intents = {
+
+            greeting: {
+                keywords: [
+                    "hello",
+                    "hi",
+                    "hey",
+                    "good morning",
+                    "good afternoon",
+                    "good evening",
+                    "hai"
+                ],
+
+                responses: [
+                    "Hello! 👋 How can I help you today?",
+                    "Hi there! 🤖 What would you like to know?",
+                    "Hey! Great to see you. How can I assist?"
+                ]
+            },
+
+
+            nlp: {
+                keywords: [
+                    "what is nlp",
+                    "nlp",
+                    "natural language processing",
+                    "language processing"
+                ],
+
+                responses: [
+                    "🧠 NLP stands for Natural Language Processing. It is a branch of Artificial Intelligence that enables computers to understand, process and generate human language.",
+                    "NLP allows computers to work with human language. Common applications include chatbots, sentiment analysis, translation, speech recognition and text classification."
+                ]
+            },
+
+
+            python: {
+                keywords: [
+                    "python",
+                    "python language",
+                    "learn python"
+                ],
+
+                responses: [
+                    "🐍 Python is a high-level programming language known for its simple syntax. It is widely used in AI, Data Science, Machine Learning, Web Development and Automation.",
+                    "Python is especially popular in NLP because libraries such as NLTK, spaCy, Transformers and scikit-learn provide powerful text-processing capabilities."
+                ]
+            },
+
+
+            ai: {
+                keywords: [
+                    "artificial intelligence",
+                    "what is ai",
+                    "ai",
+                    "machine intelligence"
+                ],
+
+                responses: [
+                    "🤖 Artificial Intelligence is the field of computer science focused on creating systems that can perform tasks requiring human-like intelligence.",
+                    "AI includes areas such as Machine Learning, Deep Learning, Natural Language Processing, Computer Vision and Robotics."
+                ]
+            },
+
+
+            machinelearning: {
+                keywords: [
+                    "machine learning",
+                    "ml",
+                    "what is machine learning"
+                ],
+
+                responses: [
+                    "📊 Machine Learning is a branch of AI where computers learn patterns from data and use those patterns to make predictions or decisions.",
+                    "The three common types of Machine Learning are supervised learning, unsupervised learning and reinforcement learning."
+                ]
+            },
+
+
+            project: {
+                keywords: [
+                    "project",
+                    "college project",
+                    "mini project",
+                    "final year project",
+                    "project idea"
+                ],
+
+                responses: [
+                    "🚀 For an AI & Data Science project, you could build a chatbot, AQI prediction system, sentiment analysis application, recommendation system or smart waste-management system.",
+                    "A good NLP project can include intent classification, sentiment analysis, text preprocessing and conversational responses."
+                ]
+            },
+
+
+            chatbot: {
+                keywords: [
+                    "chatbot",
+                    "what can you do",
+                    "capabilities",
+                    "your features"
+                ],
+
+                responses: [
+                    "🤖 I can perform simple NLP-based intent detection, identify keywords, analyze basic sentiment and generate responses.",
+                    "My main capabilities include greetings, NLP explanations, AI topics, Python questions, project suggestions and basic conversational assistance."
+                ]
+            },
+
+
+            college: {
+                keywords: [
+                    "college",
+                    "university",
+                    "student",
+                    "study",
+                    "exam",
+                    "course"
+                ],
+
+                responses: [
+                    "🎓 Staying consistent with programming practice, projects and fundamentals can greatly improve your technical skills.",
+                    "For an AI & Data Science student, focus on Python, SQL, Statistics, Machine Learning, NLP, Data Structures and practical projects."
+                ]
+            },
+
+
+            thanks: {
+                keywords: [
+                    "thank you",
+                    "thanks",
+                    "thank",
+                    "thx"
+                ],
+
+                responses: [
+                    "You're welcome! 😊",
+                    "Happy to help! 🚀",
+                    "Anytime! 🤖"
+                ]
+            },
+
+
+            goodbye: {
+                keywords: [
+                    "bye",
+                    "goodbye",
+                    "see you",
+                    "exit"
+                ],
+
+                responses: [
+                    "Goodbye! 👋 Have a great day!",
+                    "See you later! 🚀 Keep learning!"
+                ]
+            }
+
+        };
+
+
+        /* =========================================
+           SENTIMENT WORDS
+        ========================================== */
+
+        const positiveWords = [
+            "good",
+            "great",
+            "excellent",
+            "awesome",
+            "happy",
+            "love",
+            "nice",
+            "amazing",
+            "best"
+        ];
+
+        const negativeWords = [
+            "bad",
+            "sad",
+            "angry",
+            "hate",
+            "terrible",
+            "worst",
+            "problem",
+            "error",
+            "failed"
+        ];
+
+
+        /* =========================================
+           TEXT NORMALIZATION
+        ========================================== */
+
+        function normalizeText(text) {
+
+            return text
+                .toLowerCase()
+                .replace(/[^\w\s]/gi, "")
+                .replace(/\s+/g, " ")
+                .trim();
+
+        }
+
+
+        /* =========================================
+           TOKENIZATION
+        ========================================== */
+
+        function tokenize(text) {
+
+            return normalizeText(text)
+                .split(" ")
+                .filter(word => word.length > 0);
+
+        }
+
+
+        /* =========================================
+           SENTIMENT ANALYSIS
+        ========================================== */
+
+        function analyzeSentiment(text) {
+
+            const tokens = tokenize(text);
+
+            let positive = 0;
+            let negative = 0;
+
+            tokens.forEach(word => {
+
+                if (positiveWords.includes(word)) {
+                    positive++;
+                }
+
+                if (negativeWords.includes(word)) {
+                    negative++;
+                }
+
+            });
+
+
+            if (positive > negative) {
+
+                return {
+                    label: "Positive",
+                    score: 85
+                };
+
+            }
+
+            if (negative > positive) {
+
+                return {
+                    label: "Negative",
+                    score: 35
+                };
+
+            }
+
+            return {
+                label: "Neutral",
+                score: 72
+            };
+
+        }
+
+
+        /* =========================================
+           INTENT DETECTION
+        ========================================== */
+
+        function detectIntent(text) {
+
+            const normalized =
+                normalizeText(text);
+
+            let bestIntent = "unknown";
+            let bestScore = 0;
+
+            for (
+                const [intent, data] of Object.entries(intents)
+            ) {
+
+                let score = 0;
+
+                data.keywords.forEach(keyword => {
+
+                    if (
+                        normalized.includes(
+                            keyword.toLowerCase()
+                        )
+                    ) {
+
+                        score += keyword.split(" ").length;
+
+                    }
+
+                });
+
+
+                if (score > bestScore) {
+
+                    bestScore = score;
+                    bestIntent = intent;
+
+                }
+
+            }
+
+
+            return {
+                intent: bestIntent,
+                confidence: bestScore > 0 ?
+                    Math.min(
+                        70 + bestScore * 7,
+                        98
+                    ) : 42
+            };
+
+        }
+
+
+        /* =========================================
+           GENERATE RESPONSE
+        ========================================== */
+
+        function generateResponse(text) {
+
+            const result =
+                detectIntent(text);
+
+            const sentiment =
+                analyzeSentiment(text);
+
+
+            updateNLPPanel(
+                result,
+                sentiment
+            );
+
+
+            if (
+                result.intent === "unknown"
+            ) {
+
+                return `
+                🤔 I'm still learning.
+
+                I understood your message, but
+                I don't have a specific response
+                for that topic yet.
+
+                Try asking me about
+                <b>NLP, AI, Python, Machine Learning,
+                chatbots or college projects</b>.
+            `;
+
+            }
+
+
+            const responses =
+                intents[result.intent].responses;
+
+            return responses[
+                Math.floor(
+                    Math.random() *
+                    responses.length
+                )
+            ];
+
+        }
+
+
+        /* =========================================
+           ADD MESSAGE TO CHAT
+        ========================================== */
+
+        function addMessage(
+            text,
+            sender
+        ) {
+
+            const message =
+                document.createElement("div");
+
+            message.className =
+                `message ${sender}`;
+
+
+            const avatar =
+                document.createElement("div");
+
+            avatar.className =
+                `message-avatar ${
+                sender === "bot"
+                    ? "bot-avatar"
+                    : "user-avatar"
+            }`;
+
+            avatar.innerHTML =
+                sender === "bot" ?
+                '<i class="fa-solid fa-robot"></i>' :
+                '<i class="fa-solid fa-user"></i>';
+
+
+            const content =
+                document.createElement("div");
+
+            content.className =
+                "message-content";
+
+
+            const name =
+                document.createElement("div");
+
+            name.className =
+                "message-name";
+
+            name.textContent =
+                sender === "bot" ?
+                "NeuroBot • AI Assistant" :
+                "You";
+
+
+            const bubble =
+                document.createElement("div");
+
+            bubble.className =
+                "bubble";
+
+            bubble.innerHTML = text;
+
+
+            content.appendChild(name);
+
+            content.appendChild(bubble);
+
+            message.appendChild(avatar);
+
+            message.appendChild(content);
+
+            chatBody.appendChild(message);
+
+
+            chatBody.scrollTop =
+                chatBody.scrollHeight;
+
+        }
+
+
+        /* =========================================
+           SEND MESSAGE
+        ========================================== */
+
+        function sendMessage() {
+
+            const text =
+                input.value.trim();
+
+
+            if (!text) {
+
+                showToast(
+                    "Please type a message"
+                );
+
+                return;
+
+            }
+
+
+            addMessage(
+                escapeHTML(text),
+                "user"
+            );
+
+
+            input.value = "";
+
+
+            messageCount++;
+
+            totalMessages.textContent =
+                messageCount;
+
+
+            showTyping();
+
+
+            setTimeout(() => {
+
+                hideTyping();
+
+
+                const response =
+                    generateResponse(text);
+
+
+                addMessage(
+                    response,
+                    "bot"
+                );
+
+
+                messageCount++;
+
+                totalMessages.textContent =
+                    messageCount;
+
+            }, 900);
+
+        }
+
+
+        /* =========================================
+           ENTER KEY
+        ========================================== */
+
+        input.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Enter"
+                ) {
+
+                    sendMessage();
+
+                }
+
+            }
+        );
+
+
+        /* =========================================
+           QUICK MESSAGE
+        ========================================== */
+
+        function quickMessage(text) {
+
+            input.value = text;
+
+            sendMessage();
+
+        }
+
+
+        /* =========================================
+           TYPING
+        ========================================== */
+
+        function showTyping() {
+
+            const typing =
+                document.getElementById(
+                    "typingMessage"
+                );
+
+            typing.style.display =
+                "flex";
+
+            chatBody.scrollTop =
+                chatBody.scrollHeight;
+
+        }
+
+
+        function hideTyping() {
+
+            const typing =
+                document.getElementById(
+                    "typingMessage"
+                );
+
+            typing.style.display =
+                "none";
+
+        }
+
+
+        /* =========================================
+           UPDATE NLP ANALYSIS
+        ========================================== */
+
+        function updateNLPPanel(
+            intentData,
+            sentimentData
+        ) {
+
+            const bars =
+                document.querySelectorAll(
+                    ".progress-bar"
+                );
+
+
+            if (bars.length >= 4) {
+
+                bars[0].style.width =
+                    intentData.confidence + "%";
+
+                bars[1].style.width =
+                    sentimentData.score + "%";
+
+                bars[2].style.width =
+                    Math.min(
+                        intentData.confidence + 5,
+                        99
+                    ) + "%";
+
+                bars[3].style.width =
+                    "68%";
+
+            }
+
+
+            const labels =
+                document.querySelectorAll(
+                    ".nlp-label strong"
+                );
+
+
+            if (labels.length >= 3) {
+
+                labels[0].textContent =
+                    intentData.confidence + "%";
+
+                labels[1].textContent =
+                    sentimentData.score + "%";
+
+                labels[2].textContent =
+                    Math.min(
+                        intentData.confidence + 5,
+                        99
+                    ) + "%";
+
+            }
+
+
+            const tags =
+                document.querySelectorAll(
+                    ".tag"
+                );
+
+
+            tags.forEach(tag => {
+
+                tag.classList.remove(
+                    "active"
+                );
+
+            });
+
+
+            const intentName =
+                intentData.intent
+                .charAt(0)
+                .toUpperCase() +
+                intentData.intent
+                .slice(1);
+
+
+            tags.forEach(tag => {
+
+                if (
+                    tag.textContent
+                    .trim()
+                    .toLowerCase()
+                    .includes(
+                        intentName.toLowerCase()
+                    )
+                ) {
+
+                    tag.classList.add(
+                        "active"
+                    );
+
+                }
+
+            });
+
+        }
+
+
+        /* =========================================
+           CLEAR CHAT
+        ========================================== */
+
+        function clearChat() {
+
+            chatBody.innerHTML = "";
+
+
+            addMessage(
+                `
+            👋 Chat cleared successfully.
+
+            <br><br>
+
+            I'm ready for a new conversation.
+            What would you like to ask?
+            `,
+                "bot"
+            );
+
+
+            showToast(
+                "Conversation cleared"
+            );
+
+        }
+
+
+        /* =========================================
+           EXPORT CHAT
+        ========================================== */
+
+        function exportChat() {
+
+            const messages =
+                document.querySelectorAll(
+                    "#chatBody .message"
+                );
+
+            let output =
+                "NEUROBOT AI - CHAT EXPORT\n";
+
+            output +=
+                "===========================\n\n";
+
+
+            messages.forEach(message => {
+
+                const name =
+                    message.querySelector(
+                        ".message-name"
+                    ) ? .textContent || "";
+
+
+                const bubble =
+                    message.querySelector(
+                        ".bubble"
+                    ) ? .innerText || "";
+
+
+                output +=
+                    `${name}\n${bubble}\n\n`;
+
+            });
+
+
+            const blob =
+                new Blob(
+                    [output], {
+                        type: "text/plain"
+                    }
+                );
+
+
+            const url =
+                URL.createObjectURL(blob);
+
+
+            const link =
+                document.createElement("a");
+
+            link.href = url;
+
+            link.download =
+                "neurobot-chat.txt";
+
+            link.click();
+
+
+            URL.revokeObjectURL(url);
+
+
+            showToast(
+                "Chat exported successfully"
+            );
+
+        }
+
+
+        /* =========================================
+           TOAST
+        ========================================== */
+
+        function showToast(message) {
+
+            const toast =
+                document.getElementById(
+                    "toast"
+                );
+
+            toast.textContent =
+                message;
+
+            toast.classList.add(
+                "show"
+            );
+
+
+            setTimeout(() => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            }, 2500);
+
+        }
+
+
+        /* =========================================
+           SECURITY
+        ========================================== */
+
+        function escapeHTML(text) {
+
+            const div =
+                document.createElement("div");
+
+            div.textContent = text;
+
+            return div.innerHTML;
+
+        }
+
+
+        /* =========================================
+           NAVIGATION EFFECT
+        ========================================== */
+
+        document
+            .querySelectorAll(".nav-item")
+            .forEach(item => {
+
+                item.addEventListener(
+                    "click",
+                    function() {
+
+                        document
+                            .querySelectorAll(
+                                ".nav-item"
+                            )
+                            .forEach(nav => {
+
+                                nav.classList.remove(
+                                    "active"
+                                );
+
+                            });
+
+
+                        this.classList.add(
+                            "active"
+                        );
+
+                        const name =
+                            this
+                            .querySelector("span") ?
+                            .textContent;
+
+                        if (name) {
+
+                            showToast(
+                                `${name} selected`
+                            );
+
+                        }
+
+                    }
+                );
+
+            });
+
+
+        /* =========================================
+           INITIAL MESSAGE
+        ========================================== */
+
+        console.log(
+            "NeuroBot NLP Engine initialized successfully."
+        );
+    </script>
+
+</body>
+
+</html>

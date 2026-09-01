@@ -1,0 +1,2891 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- =========================================================
+         BASIC HTML INFORMATION
+    ========================================================== -->
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- TITLE TAG -->
+    <title>
+        TechNova | Technology, AI & Web Development Blog
+    </title>
+
+    <!-- META DESCRIPTION -->
+    <meta name="description" content="TechNova is a modern technology blog covering Artificial Intelligence, Web Development, Programming and Digital Innovation.">
+
+    <!-- META KEYWORDS -->
+    <meta name="keywords" content="technology, AI, programming, web development, WordPress, coding, machine learning">
+
+    <meta name="author" content="TechNova Media">
+
+    <!-- GOOGLE FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- =========================================================
+         COMPLETE CSS
+    ========================================================== -->
+
+    <style>
+        /* =====================================================
+           GLOBAL VARIABLES
+        ====================================================== */
+        
+         :root {
+            --primary: #6d28d9;
+            --primary-light: #8b5cf6;
+            --secondary: #06b6d4;
+            --accent: #f59e0b;
+            --pink: #ec4899;
+            --dark: #09090b;
+            --dark-2: #111827;
+            --dark-3: #1f2937;
+            --white: #ffffff;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --border: #e5e7eb;
+            --shadow: 0 15px 45px rgba(15, 23, 42, 0.10);
+            --shadow-large: 0 25px 70px rgba(15, 23, 42, 0.15);
+        }
+        /* =====================================================
+           RESET
+        ====================================================== */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: "Inter", sans-serif;
+            background: linear-gradient( 180deg, #f8fafc, #ffffff);
+            color: #172033;
+            line-height: 1.7;
+        }
+        
+        img {
+            max-width: 100%;
+            display: block;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        button,
+        input,
+        textarea {
+            font-family: inherit;
+        }
+        /* =====================================================
+           TOP ANNOUNCEMENT BAR
+        ====================================================== */
+        
+        .announcement {
+            background: linear-gradient( 90deg, #4c1d95, #6d28d9, #0891b2);
+            color: white;
+            padding: 9px 20px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .2px;
+        }
+        
+        .announcement i {
+            margin-right: 7px;
+            color: #fde68a;
+        }
+        /* =====================================================
+           HEADER
+        ====================================================== */
+        
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        
+        .header-container {
+            max-width: 1250px;
+            margin: auto;
+            padding: 16px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+        /* =====================================================
+           LOGO
+        ====================================================== */
+        
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+        
+        .logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient( 135deg, var(--primary), var(--secondary));
+            color: white;
+            font-size: 21px;
+            box-shadow: 0 8px 25px rgba(109, 40, 217, 0.3);
+        }
+        
+        .brand-name {
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: -.7px;
+        }
+        
+        .brand-name span {
+            color: var(--primary);
+        }
+        
+        .brand-subtitle {
+            color: var(--gray);
+            font-size: 9px;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+        }
+        /* =====================================================
+           NAVIGATION
+        ====================================================== */
+        
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        nav a {
+            padding: 9px 13px;
+            border-radius: 9px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #475569;
+            transition: .3s;
+        }
+        
+        nav a:hover {
+            background: #f1f5f9;
+            color: var(--primary);
+        }
+        
+        nav a.active {
+            color: var(--primary);
+            background: #f3e8ff;
+        }
+        /* =====================================================
+           HEADER BUTTONS
+        ====================================================== */
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .header-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            color: #475569;
+            transition: .3s;
+        }
+        
+        .header-btn:hover {
+            color: white;
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        /* =====================================================
+           HERO
+        ====================================================== */
+        
+        .hero {
+            max-width: 1250px;
+            margin: auto;
+            padding: 65px 25px 55px;
+        }
+        
+        .hero-box {
+            min-height: 420px;
+            border-radius: 30px;
+            padding: 55px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            background: radial-gradient( circle at 80% 20%, rgba(34, 211, 238, .22), transparent 30%), radial-gradient( circle at 15% 90%, rgba(139, 92, 246, .25), transparent 35%), linear-gradient( 135deg, #111827, #1e1b4b);
+            color: white;
+            box-shadow: var(--shadow-large);
+        }
+        
+        .hero-box::before {
+            content: "";
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 50%;
+            right: -100px;
+            top: -100px;
+        }
+        
+        .hero-box::after {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border: 1px solid rgba(255, 255, 255, .05);
+            border-radius: 50%;
+            right: 80px;
+            bottom: -120px;
+        }
+        
+        .hero-content {
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 12px;
+            background: rgba(255, 255, 255, .08);
+            border: 1px solid rgba(255, 255, 255, .13);
+            border-radius: 30px;
+            font-size: 10px;
+            color: #c4b5fd;
+            margin-bottom: 18px;
+        }
+        
+        .hero h1 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(38px, 5vw, 67px);
+            line-height: 1.05;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+        }
+        
+        .hero h1 span {
+            background: linear-gradient( 90deg, #c4b5fd, #67e8f9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            color: #cbd5e1;
+            max-width: 650px;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 27px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: .3s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient( 135deg, #7c3aed, #8b5cf6);
+            color: white;
+            box-shadow: 0 8px 25px rgba(124, 58, 237, .3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 13px 30px rgba(124, 58, 237, .4);
+        }
+        
+        .btn-outline {
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .15);
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, .12);
+        }
+        /* =====================================================
+           MAIN CONTAINER
+        ====================================================== */
+        
+        .container {
+            max-width: 1250px;
+            margin: auto;
+            padding: 0 25px;
+        }
+        /* =====================================================
+           SECTION HEADER
+        ====================================================== */
+        
+        .section-header {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            margin-bottom: 22px;
+        }
+        
+        .section-label {
+            color: var(--primary);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+        
+        .section-header h2 {
+            font-family: "Playfair Display", serif;
+            font-size: 30px;
+            color: #111827;
+        }
+        
+        .view-all {
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 700;
+        }
+        /* =====================================================
+           FEATURED POSTS
+        ====================================================== */
+        
+        .featured {
+            padding: 25px 0 55px;
+        }
+        
+        .featured-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 20px;
+        }
+        
+        .featured-main {
+            min-height: 430px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 22px;
+            background: #111827;
+            color: white;
+        }
+        
+        .featured-main img {
+            width: 100%;
+            height: 100%;
+            min-height: 430px;
+            object-fit: cover;
+            opacity: .55;
+            transition: .5s;
+        }
+        
+        .featured-main:hover img {
+            transform: scale(1.05);
+            opacity: .65;
+        }
+        
+        .featured-overlay {
+            position: absolute;
+            inset: 0;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            background: linear-gradient( transparent 20%, rgba(2, 6, 23, .95));
+        }
+        
+        .category {
+            display: inline-flex;
+            width: fit-content;
+            padding: 6px 10px;
+            background: var(--primary);
+            color: white;
+            border-radius: 6px;
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .7px;
+            margin-bottom: 12px;
+        }
+        
+        .featured-overlay h3 {
+            font-family: "Playfair Display", serif;
+            font-size: 31px;
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+        
+        .featured-overlay p {
+            color: #cbd5e1;
+            font-size: 12px;
+            max-width: 620px;
+        }
+        
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #94a3b8;
+            font-size: 9px;
+            margin-top: 15px;
+        }
+        
+        .featured-side {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .mini-post {
+            min-height: 205px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            background: #111827;
+            color: white;
+        }
+        
+        .mini-post img {
+            width: 100%;
+            height: 100%;
+            min-height: 205px;
+            object-fit: cover;
+            opacity: .5;
+            transition: .4s;
+        }
+        
+        .mini-post:hover img {
+            transform: scale(1.05);
+            opacity: .65;
+        }
+        
+        .mini-overlay {
+            position: absolute;
+            inset: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            background: linear-gradient( transparent, rgba(2, 6, 23, .9));
+        }
+        
+        .mini-overlay h4 {
+            font-family: "Playfair Display", serif;
+            font-size: 20px;
+            line-height: 1.25;
+        }
+        /* =====================================================
+           BLOG AREA
+        ====================================================== */
+        
+        .blog-section {
+            padding: 20px 0 70px;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 35px;
+        }
+        
+        .posts {
+            display: grid;
+            gap: 22px;
+        }
+        /* =====================================================
+           BLOG CARD
+        ====================================================== */
+        
+        .blog-card {
+            display: grid;
+            grid-template-columns: 270px 1fr;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 17px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(15, 23, 42, .04);
+            transition: .3s;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+        
+        .blog-image {
+            min-height: 220px;
+            overflow: hidden;
+        }
+        
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: .5s;
+        }
+        
+        .blog-card:hover .blog-image img {
+            transform: scale(1.06);
+        }
+        
+        .blog-content {
+            padding: 23px;
+        }
+        
+        .blog-content h3 {
+            font-family: "Playfair Display", serif;
+            font-size: 22px;
+            line-height: 1.3;
+            color: #111827;
+            margin: 9px 0;
+        }
+        
+        .blog-content p {
+            color: #64748b;
+            font-size: 11px;
+            line-height: 1.7;
+        }
+        
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 15px;
+            color: var(--primary);
+            font-size: 10px;
+            font-weight: 800;
+        }
+        /* =====================================================
+           SIDEBAR
+        ====================================================== */
+        
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .sidebar-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 17px;
+            padding: 22px;
+            box-shadow: 0 5px 20px rgba(15, 23, 42, .04);
+        }
+        
+        .sidebar-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: "Playfair Display", serif;
+            font-size: 19px;
+            margin-bottom: 17px;
+        }
+        
+        .sidebar-title i {
+            color: var(--primary);
+            font-size: 14px;
+        }
+        /* =====================================================
+           ABOUT
+        ====================================================== */
+        
+        .author {
+            text-align: center;
+        }
+        
+        .author-logo {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            background: linear-gradient( 135deg, #7c3aed, #06b6d4);
+        }
+        
+        .author h3 {
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+        
+        .author p {
+            color: #64748b;
+            font-size: 10px;
+            line-height: 1.7;
+        }
+        /* =====================================================
+           CATEGORY LIST
+        ====================================================== */
+        
+        .category-list {
+            list-style: none;
+        }
+        
+        .category-list li {
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .category-list li:last-child {
+            border: none;
+        }
+        
+        .category-list a {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            color: #475569;
+            font-size: 11px;
+            transition: .3s;
+        }
+        
+        .category-list a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+        
+        .count {
+            background: #f1f5f9;
+            padding: 2px 7px;
+            border-radius: 20px;
+            font-size: 8px;
+        }
+        /* =====================================================
+           NEWSLETTER
+        ====================================================== */
+        
+        .newsletter {
+            background: linear-gradient( 135deg, #4c1d95, #155e75);
+            color: white;
+            border: none;
+        }
+        
+        .newsletter .sidebar-title {
+            color: white;
+        }
+        
+        .newsletter p {
+            color: #cbd5e1;
+            font-size: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .newsletter input {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid rgba(255, 255, 255, .15);
+            background: rgba(255, 255, 255, .08);
+            color: white;
+            border-radius: 8px;
+            outline: none;
+            font-size: 10px;
+            margin-bottom: 8px;
+        }
+        
+        .newsletter input::placeholder {
+            color: #94a3b8;
+        }
+        
+        .newsletter button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            background: white;
+            color: #4c1d95;
+            font-size: 10px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+        /* =====================================================
+           POPULAR POSTS
+        ====================================================== */
+        
+        .popular-post {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+        
+        .popular-number {
+            width: 27px;
+            height: 27px;
+            border-radius: 8px;
+            background: #f3e8ff;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 10px;
+        }
+        
+        .popular-post h4 {
+            font-size: 10px;
+            line-height: 1.5;
+            color: #334155;
+        }
+        
+        .popular-post span {
+            color: #94a3b8;
+            font-size: 8px;
+        }
+        /* =====================================================
+           TAG CLOUD
+        ====================================================== */
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        
+        .tag {
+            padding: 6px 9px;
+            border-radius: 6px;
+            background: #f8fafc;
+            color: #64748b;
+            border: 1px solid #e2e8f0;
+            font-size: 9px;
+            transition: .3s;
+        }
+        
+        .tag:hover {
+            color: white;
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+        /* =====================================================
+           ARTICLE DEMONSTRATION
+        ====================================================== */
+        
+        .html-demo {
+            margin: 0 0 70px;
+            padding: 45px;
+            border-radius: 25px;
+            background: #0f172a;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .html-demo::before {
+            content: "</>";
+            position: absolute;
+            right: 40px;
+            top: 20px;
+            font-size: 100px;
+            font-weight: 900;
+            color: rgba(255, 255, 255, .025);
+        }
+        
+        .html-demo h2 {
+            font-family: "Playfair Display", serif;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+        
+        .html-demo>p {
+            color: #94a3b8;
+            font-size: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .html-elements {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        
+        .element-box {
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, .08);
+            background: rgba(255, 255, 255, .04);
+            border-radius: 13px;
+        }
+        
+        .element-box i {
+            color: #22d3ee;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .element-box code {
+            display: block;
+            color: #c4b5fd;
+            font-size: 10px;
+            margin-bottom: 7px;
+        }
+        
+        .element-box p {
+            color: #94a3b8;
+            font-size: 9px;
+        }
+        /* =====================================================
+           FOOTER
+        ====================================================== */
+        
+        footer {
+            background: #09090b;
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-grid {
+            max-width: 1250px;
+            margin: auto;
+            padding: 0 25px;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 35px;
+        }
+        
+        .footer-brand {
+            color: #94a3b8;
+            font-size: 10px;
+            max-width: 300px;
+            margin-top: 12px;
+            line-height: 1.8;
+        }
+        
+        footer h3 {
+            font-size: 12px;
+            margin-bottom: 14px;
+        }
+        
+        footer ul {
+            list-style: none;
+        }
+        
+        footer li {
+            margin-bottom: 8px;
+        }
+        
+        footer a {
+            color: #64748b;
+            font-size: 10px;
+            transition: .3s;
+        }
+        
+        footer a:hover {
+            color: #c4b5fd;
+        }
+        
+        .socials {
+            display: flex;
+            gap: 7px;
+            margin-top: 15px;
+        }
+        
+        .social {
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #27272a;
+            border-radius: 8px;
+            color: #94a3b8;
+            transition: .3s;
+        }
+        
+        .social:hover {
+            color: white;
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .copyright {
+            max-width: 1250px;
+            margin: 40px auto 0;
+            padding: 20px 25px 0;
+            border-top: 1px solid #27272a;
+            display: flex;
+            justify-content: space-between;
+            color: #52525b;
+            font-size: 9px;
+        }
+        /* =====================================================
+           BACK TO TOP
+        ====================================================== */
+        
+        .top-button {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            width: 42px;
+            height: 42px;
+            border: none;
+            border-radius: 12px;
+            background: var(--primary);
+            color: white;
+            cursor: pointer;
+            display: none;
+            z-index: 500;
+            box-shadow: 0 8px 25px rgba(109, 40, 217, .3);
+        }
+        
+        .top-button.show {
+            display: block;
+        }
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+        
+        @media(max-width:1000px) {
+            nav {
+                display: none;
+            }
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            .html-elements {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media(max-width:700px) {
+            .header-container {
+                padding: 12px 15px;
+            }
+            .brand-subtitle {
+                display: none;
+            }
+            .hero {
+                padding: 25px 15px;
+            }
+            .hero-box {
+                padding: 35px 25px;
+                min-height: 430px;
+            }
+            .hero h1 {
+                font-size: 39px;
+            }
+            .container {
+                padding: 0 15px;
+            }
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+            .blog-card {
+                grid-template-columns: 1fr;
+            }
+            .blog-image {
+                min-height: 210px;
+            }
+            .html-demo {
+                padding: 30px 20px;
+            }
+            .html-elements {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .copyright {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+     ANNOUNCEMENT
+========================================================== -->
+
+    <div class="announcement">
+
+        <i class="fa-solid fa-bolt"></i> Welcome to TechNova — Exploring Technology, AI & Digital Innovation
+
+    </div>
+
+
+
+    <!-- =========================================================
+     HEADER
+========================================================== -->
+
+    <header id="home">
+
+        <div class="header-container">
+
+
+            <!-- LOGO -->
+
+            <a href="#home" class="logo-area">
+
+                <div class="logo">
+
+                    <i class="fa-solid fa-microchip"></i>
+
+                </div>
+
+                <div>
+
+                    <div class="brand-name">
+                        Tech<span>Nova</span>
+                    </div>
+
+                    <div class="brand-subtitle">
+                        DIGITAL KNOWLEDGE HUB
+                    </div>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- NAVIGATION / ANCHOR TAGS -->
+
+            <nav>
+
+                <a href="#home" class="active">
+                Home
+            </a>
+
+                <a href="#featured">
+                Featured
+            </a>
+
+                <a href="#articles">
+                Articles
+            </a>
+
+                <a href="#categories">
+                Categories
+            </a>
+
+                <a href="#about">
+                About
+            </a>
+
+                <a href="#contact">
+                Contact
+            </a>
+
+            </nav>
+
+
+
+            <!-- HEADER ACTIONS -->
+
+            <div class="header-actions">
+
+                <button class="header-btn" onclick="openSearch()">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+            </button>
+
+
+                <button class="header-btn" onclick="showMessage()">
+
+                <i class="fa-regular fa-bell"></i>
+
+            </button>
+
+            </div>
+
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================================================
+     HERO SECTION
+========================================================== -->
+
+    <section class="hero">
+
+        <div class="hero-box">
+
+
+            <div class="hero-content">
+
+
+                <div class="hero-badge">
+
+                    <i class="fa-solid fa-sparkles"></i> TECHNOLOGY • AI • DEVELOPMENT
+
+                </div>
+
+
+                <!-- H1 TAG -->
+
+                <h1>
+
+                    Ideas that shape
+                    <span>the digital future.</span>
+
+                </h1>
+
+
+                <p>
+
+                    Welcome to TechNova, a modern technology blog where programming, Artificial Intelligence, Web Development and innovation come together.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+
+                    <!-- ANCHOR TAG -->
+
+                    <a href="#articles" class="btn btn-primary">
+
+                    Explore Articles
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+
+                    <!-- ANCHOR TAG -->
+
+                    <a href="#about" class="btn btn-outline">
+
+                        <i class="fa-solid fa-circle-info"></i> About TechNova
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+     FEATURED SECTION
+========================================================== -->
+
+    <section class="featured" id="featured">
+
+        <div class="container">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <div class="section-label">
+                        Editor's Choice
+                    </div>
+
+                    <!-- H2 TAG -->
+
+                    <h2>
+                        Featured Stories
+                    </h2>
+
+                </div>
+
+
+                <a href="#articles" class="view-all">
+
+                View all stories
+                →
+
+            </a>
+
+            </div>
+
+
+
+            <div class="featured-grid">
+
+
+                <!-- MAIN FEATURED ARTICLE -->
+
+                <article class="featured-main">
+
+
+                    <!-- IMAGE -->
+
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80" alt="Computer technology and programming">
+
+
+                    <div class="featured-overlay">
+
+
+                        <span class="category">
+                        Artificial Intelligence
+                    </span>
+
+
+                        <!-- H3 TAG -->
+
+                        <h3>
+
+                            How Artificial Intelligence Is Transforming the Digital World
+
+                        </h3>
+
+
+                        <p>
+
+                            Discover how modern AI technologies are changing software development, education, business and everyday life.
+
+                        </p>
+
+
+                        <div class="post-meta">
+
+                            <span>
+                            <i class="fa-regular fa-user"></i>
+                            TechNova Team
+                        </span>
+
+                            <span>
+                            <i class="fa-regular fa-calendar"></i>
+                            August 27, 2026
+                        </span>
+
+                            <span>
+                            <i class="fa-regular fa-clock"></i>
+                            8 min read
+                        </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- SIDE FEATURED ARTICLE -->
+
+                <div class="featured-side">
+
+
+                    <article class="mini-post">
+
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=900&q=80" alt="Web development code">
+
+
+                        <div class="mini-overlay">
+
+                            <span class="category">
+                            Web Development
+                        </span>
+
+                            <h4>
+
+                                Building Modern Websites with HTML & CSS
+
+                            </h4>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <article class="mini-post">
+
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80" alt="Data analytics dashboard">
+
+
+                        <div class="mini-overlay">
+
+                            <span class="category">
+                            Data Science
+                        </span>
+
+                            <h4>
+
+                                Why Data Is the New Digital Superpower
+
+                            </h4>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+     BLOG SECTION
+========================================================== -->
+
+    <section class="blog-section" id="articles">
+
+        <div class="container">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <div class="section-label">
+                        Latest Knowledge
+                    </div>
+
+                    <h2>
+                        Latest Articles
+                    </h2>
+
+                </div>
+
+
+                <a href="#categories" class="view-all">
+
+                Browse Categories →
+
+            </a>
+
+            </div>
+
+
+
+            <div class="content-grid">
+
+
+                <!-- =================================================
+                 BLOG POSTS
+            ================================================== -->
+
+                <main class="posts">
+
+
+                    <!-- POST 1 -->
+
+                    <article class="blog-card">
+
+
+                        <div class="blog-image">
+
+                            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80" alt="Artificial intelligence technology">
+
+                        </div>
+
+
+                        <div class="blog-content">
+
+
+                            <span class="category">
+                            AI & ML
+                        </span>
+
+
+                            <h3>
+
+                                Understanding Machine Learning for Beginners
+
+                            </h3>
+
+
+                            <p>
+
+                                Machine Learning is one of the most important branches of Artificial Intelligence. Learn the fundamentals, algorithms and practical applications.
+
+                            </p>
+
+
+                            <!-- ANCHOR TAG -->
+
+                            <a href="#article-ai" class="read-more">
+
+                            Read Full Article
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- POST 2 -->
+
+                    <article class="blog-card">
+
+
+                        <div class="blog-image">
+
+                            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="Web developer coding on laptop">
+
+                        </div>
+
+
+                        <div class="blog-content">
+
+                            <span class="category" style="background:#0891b2">
+
+                            Web Development
+
+                        </span>
+
+
+                            <h3>
+
+                                10 Essential HTML Tags Every Beginner Should Know
+
+                            </h3>
+
+
+                            <p>
+
+                                Learn about important HTML elements including heading tags, paragraph tags, anchor tags, image tags, title tags and semantic elements.
+
+                            </p>
+
+
+                            <a href="#html-demo" class="read-more">
+
+                            Learn HTML Tags
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- POST 3 -->
+
+                    <article class="blog-card">
+
+
+                        <div class="blog-image">
+
+                            <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=800&q=80" alt="Programming code">
+
+                        </div>
+
+
+                        <div class="blog-content">
+
+
+                            <span class="category" style="background:#db2777">
+
+                            Programming
+
+                        </span>
+
+
+                            <h3>
+
+                                Python Programming: From Beginner to Developer
+
+                            </h3>
+
+
+                            <p>
+
+                                Python provides a simple syntax and powerful libraries for Web Development, Data Science, Machine Learning and AI.
+
+                            </p>
+
+
+                            <a href="#python" class="read-more">
+
+                            Explore Python
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- POST 4 -->
+
+                    <article class="blog-card">
+
+
+                        <div class="blog-image">
+
+                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80" alt="Student learning technology">
+
+                        </div>
+
+
+                        <div class="blog-content">
+
+
+                            <span class="category" style="background:#ea580c">
+
+                            Education
+
+                        </span>
+
+
+                            <h3>
+
+                                How Students Can Build Better Technology Projects
+
+                            </h3>
+
+
+                            <p>
+
+                                A practical guide to choosing a project, planning modules, designing interfaces, writing code and presenting the final project professionally.
+
+                            </p>
+
+
+                            <a href="#about" class="read-more">
+
+                            Read More
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                        </div>
+
+                    </article>
+
+
+                </main>
+
+
+
+                <!-- =================================================
+                 SIDEBAR
+            ================================================== -->
+
+                <aside class="sidebar">
+
+
+                    <!-- ABOUT -->
+
+                    <div class="sidebar-card" id="about">
+
+
+                        <div class="sidebar-title">
+
+                            <i class="fa-solid fa-circle-info"></i> About TechNova
+
+                        </div>
+
+
+                        <div class="author">
+
+
+                            <div class="author-logo">
+
+                                <i class="fa-solid fa-atom"></i>
+
+                            </div>
+
+
+                            <h3>
+                                TechNova Media
+                            </h3>
+
+
+                            <p>
+
+                                A digital knowledge platform dedicated to technology, programming, AI and innovation.
+
+                            </p>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CATEGORIES -->
+
+                    <div class="sidebar-card" id="categories">
+
+
+                        <div class="sidebar-title">
+
+                            <i class="fa-solid fa-layer-group"></i> Categories
+
+                        </div>
+
+
+                        <ul class="category-list">
+
+
+                            <li>
+
+                                <a href="#articles">
+
+                                Artificial Intelligence
+
+                                <span class="count">
+                                    18
+                                </span>
+
+                            </a>
+
+                            </li>
+
+
+                            <li>
+
+                                <a href="#articles">
+
+                                Web Development
+
+                                <span class="count">
+                                    24
+                                </span>
+
+                            </a>
+
+                            </li>
+
+
+                            <li>
+
+                                <a href="#articles">
+
+                                Programming
+
+                                <span class="count">
+                                    32
+                                </span>
+
+                            </a>
+
+                            </li>
+
+
+                            <li>
+
+                                <a href="#articles">
+
+                                Data Science
+
+                                <span class="count">
+                                    16
+                                </span>
+
+                            </a>
+
+                            </li>
+
+
+                            <li>
+
+                                <a href="#articles">
+
+                                Education
+
+                                <span class="count">
+                                    12
+                                </span>
+
+                            </a>
+
+                            </li>
+
+
+                        </ul>
+
+                    </div>
+
+
+
+                    <!-- NEWSLETTER -->
+
+                    <div class="sidebar-card newsletter">
+
+
+                        <div class="sidebar-title">
+
+                            <i class="fa-regular fa-envelope"></i> Newsletter
+
+                        </div>
+
+
+                        <p>
+
+                            Get the latest technology articles directly in your inbox.
+
+                        </p>
+
+
+                        <input type="email" id="email" placeholder="Your email address">
+
+
+                        <button onclick="subscribe()">
+
+                        Subscribe Now
+
+                        <i class="fa-solid fa-paper-plane"></i>
+
+                    </button>
+
+                    </div>
+
+
+
+                    <!-- POPULAR POSTS -->
+
+                    <div class="sidebar-card">
+
+
+                        <div class="sidebar-title">
+
+                            <i class="fa-solid fa-fire"></i> Popular Posts
+
+                        </div>
+
+
+                        <div class="popular-post">
+
+
+                            <div class="popular-number">
+                                01
+                            </div>
+
+
+                            <div>
+
+                                <h4>
+                                    What is Artificial Intelligence?
+                                </h4>
+
+                                <span>
+                                12.4K views
+                            </span>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="popular-post">
+
+
+                            <div class="popular-number">
+                                02
+                            </div>
+
+
+                            <div>
+
+                                <h4>
+                                    Complete HTML Beginner Guide
+                                </h4>
+
+                                <span>
+                                9.8K views
+                            </span>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="popular-post">
+
+
+                            <div class="popular-number">
+                                03
+                            </div>
+
+
+                            <div>
+
+                                <h4>
+                                    Best Programming Languages
+                                </h4>
+
+                                <span>
+                                8.2K views
+                            </span>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- TAGS -->
+
+                    <div class="sidebar-card">
+
+
+                        <div class="sidebar-title">
+
+                            <i class="fa-solid fa-tags"></i> Popular Tags
+
+                        </div>
+
+
+                        <div class="tags">
+
+                            <a href="#articles" class="tag">
+                            AI
+                        </a>
+
+                            <a href="#articles" class="tag">
+                            Python
+                        </a>
+
+                            <a href="#articles" class="tag">
+                            HTML
+                        </a>
+
+                            <a href="#articles" class="tag">
+                            CSS
+                        </a>
+
+                            <a href="#articles" class="tag">
+                            JavaScript
+                        </a>
+
+                            <a href="#articles" class="tag">
+                            Machine Learning
+                        </a>
+
+                            <a href="#articles" class="tag">
+                            WordPress
+                        </a>
+
+                            <a href="#articles" class="tag">
+                            Data Science
+                        </a>
+
+                        </div>
+
+                    </div>
+
+
+                </aside>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+     HTML TAG DEMONSTRATION
+========================================================== -->
+
+    <section class="container" id="html-demo">
+
+        <div class="html-demo">
+
+
+            <div class="section-label">
+                HTML Demonstration
+            </div>
+
+
+            <h2>
+                HTML Tags Used in This Blog
+            </h2>
+
+
+            <p>
+
+                This section demonstrates the important HTML tags requested for the Web Blog project.
+
+            </p>
+
+
+            <div class="html-elements">
+
+
+                <!-- TITLE -->
+
+                <div class="element-box">
+
+                    <i class="fa-solid fa-heading"></i>
+
+                    <code>
+                    &lt;title&gt;
+                </code>
+
+                    <p>
+
+                        Defines the title displayed in the browser tab.
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- ANCHOR -->
+
+                <div class="element-box">
+
+                    <i class="fa-solid fa-link"></i>
+
+                    <code>
+                    &lt;a href=""&gt;
+                </code>
+
+                    <p>
+
+                        Creates hyperlinks that connect different pages or sections.
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- IMAGE -->
+
+                <div class="element-box">
+
+                    <i class="fa-regular fa-image"></i>
+
+                    <code>
+                    &lt;img&gt;
+                </code>
+
+                    <p>
+
+                        Displays images with alternative text.
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- HEADINGS -->
+
+                <div class="element-box">
+
+                    <i class="fa-solid fa-font"></i>
+
+                    <code>
+                    &lt;h1&gt; - &lt;h6&gt;
+                </code>
+
+                    <p>
+
+                        Defines different levels of headings.
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- PARAGRAPH -->
+
+                <div class="element-box">
+
+                    <i class="fa-solid fa-align-left"></i>
+
+                    <code>
+                    &lt;p&gt;
+                </code>
+
+                    <p>
+
+                        Used for creating paragraphs of text.
+
+                    </p>
+
+                </div>
+
+
+
+                <!-- LIST -->
+
+                <div class="element-box">
+
+                    <i class="fa-solid fa-list"></i>
+
+                    <code>
+                    &lt;ul&gt; &lt;li&gt;
+                </code>
+
+                    <p>
+
+                        Creates unordered lists and list items.
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+     DEMONSTRATION ARTICLE
+========================================================== -->
+
+    <section class="container" id="article-ai" style="padding-bottom:70px;">
+
+
+        <div class="section-header">
+
+            <div>
+
+                <div class="section-label">
+                    Sample Article
+                </div>
+
+                <h2>
+                    Introduction to Artificial Intelligence
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <article style="
+        background:white;
+        border:1px solid #e5e7eb;
+        border-radius:20px;
+        padding:35px;
+        box-shadow:0 5px 25px rgba(0,0,0,.04);
+    ">
+
+
+            <h2 style="
+            font-family:'Playfair Display',serif;
+            margin-bottom:15px;
+        ">
+
+                What is Artificial Intelligence?
+
+            </h2>
+
+
+            <p style="
+            color:#64748b;
+            font-size:13px;
+            margin-bottom:18px;
+        ">
+
+                Artificial Intelligence is a field of computer science focused on creating systems capable of performing tasks that normally require human intelligence.
+
+            </p>
+
+
+            <h3 style="
+            margin:20px 0 8px;
+        ">
+
+                Applications of AI
+
+            </h3>
+
+
+            <ul style="
+            margin-left:20px;
+            color:#64748b;
+            font-size:12px;
+        ">
+
+                <li>
+                    Natural Language Processing
+                </li>
+
+                <li>
+                    Computer Vision
+                </li>
+
+                <li>
+                    Recommendation Systems
+                </li>
+
+                <li>
+                    Autonomous Vehicles
+                </li>
+
+                <li>
+                    Healthcare Analytics
+                </li>
+
+            </ul>
+
+
+            <h3 style="
+            margin:20px 0 8px;
+        ">
+
+                Learn More
+
+            </h3>
+
+
+            <!-- EXTERNAL ANCHOR TAG -->
+
+            <p style="
+            color:#64748b;
+            font-size:12px;
+        ">
+
+                You can explore additional technology resources through this
+
+                <a href="https://developer.mozilla.org/" target="_blank" style="
+                    color:#6d28d9;
+                    font-weight:800;
+               ">
+
+                external web development resource
+
+            </a>.
+
+            </p>
+
+
+        </article>
+
+    </section>
+
+
+
+    <!-- =========================================================
+     PYTHON SECTION
+========================================================== -->
+
+    <section class="container" id="python" style="padding-bottom:70px;">
+
+
+        <div class="html-demo" style="
+            background:
+            linear-gradient(135deg,#111827,#312e81);
+         ">
+
+
+            <div class="section-label">
+                Programming
+            </div>
+
+
+            <h2>
+                Python & Modern Development
+            </h2>
+
+
+            <p>
+
+                Python is widely used for Artificial Intelligence, Data Science, Machine Learning, Automation and Web Development.
+
+            </p>
+
+
+            <div style="
+            display:grid;
+            grid-template-columns:
+            repeat(auto-fit,minmax(180px,1fr));
+            gap:15px;
+        ">
+
+
+                <div class="element-box">
+
+                    <i class="fa-brands fa-python"></i>
+
+                    <code>
+                    Python
+                </code>
+
+                    <p>
+                        Simple and powerful programming language.
+                    </p>
+
+                </div>
+
+
+                <div class="element-box">
+
+                    <i class="fa-solid fa-database"></i>
+
+                    <code>
+                    Data Science
+                </code>
+
+                    <p>
+                        Analyze and visualize data.
+                    </p>
+
+                </div>
+
+
+                <div class="element-box">
+
+                    <i class="fa-solid fa-robot"></i>
+
+                    <code>
+                    Artificial Intelligence
+                </code>
+
+                    <p>
+                        Build intelligent applications.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+     CONTACT
+========================================================== -->
+
+    <section class="container" id="contact" style="padding-bottom:70px;">
+
+
+        <div style="
+        background:white;
+        border:1px solid #e5e7eb;
+        border-radius:20px;
+        padding:35px;
+        text-align:center;
+    ">
+
+
+            <div class="section-label">
+                Get In Touch
+            </div>
+
+
+            <h2 style="
+            font-family:'Playfair Display',serif;
+            font-size:30px;
+            margin-bottom:10px;
+        ">
+
+                Contact TechNova
+
+            </h2>
+
+
+            <p style="
+            color:#64748b;
+            font-size:12px;
+            margin-bottom:20px;
+        ">
+
+                Have an article idea, question or suggestion? We'd love to hear from you.
+
+            </p>
+
+
+            <a href="mailto:hello@technova.example" class="btn btn-primary">
+
+                <i class="fa-regular fa-envelope"></i> Send Email
+
+            </a>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+     FOOTER
+========================================================== -->
+
+    <footer>
+
+
+        <div class="footer-grid">
+
+
+            <!-- FOOTER BRAND -->
+
+            <div>
+
+                <div class="logo-area">
+
+                    <div class="logo">
+
+                        <i class="fa-solid fa-microchip"></i>
+
+                    </div>
+
+                    <div>
+
+                        <div class="brand-name" style="color:white;">
+
+                            Tech<span>Nova</span>
+
+                        </div>
+
+                        <div class="brand-subtitle">
+                            DIGITAL KNOWLEDGE HUB
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <p class="footer-brand">
+
+                    TechNova is a modern technology blog focused on Artificial Intelligence, programming, web development, data science and digital innovation.
+
+                </p>
+
+
+                <div class="socials">
+
+
+                    <a href="#" class="social">
+
+                        <i class="fa-brands fa-facebook-f"></i>
+
+                    </a>
+
+
+                    <a href="#" class="social">
+
+                        <i class="fa-brands fa-x-twitter"></i>
+
+                    </a>
+
+
+                    <a href="#" class="social">
+
+                        <i class="fa-brands fa-linkedin-in"></i>
+
+                    </a>
+
+
+                    <a href="#" class="social">
+
+                        <i class="fa-brands fa-github"></i>
+
+                    </a>
+
+
+                    <a href="#" class="social">
+
+                        <i class="fa-brands fa-instagram"></i>
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- QUICK LINKS -->
+
+            <div>
+
+                <h3>
+                    Quick Links
+                </h3>
+
+
+                <ul>
+
+                    <li>
+                        <a href="#home">
+                        Home
+                    </a>
+                    </li>
+
+                    <li>
+                        <a href="#featured">
+                        Featured
+                    </a>
+                    </li>
+
+                    <li>
+                        <a href="#articles">
+                        Articles
+                    </a>
+                    </li>
+
+                    <li>
+                        <a href="#about">
+                        About
+                    </a>
+                    </li>
+
+                    <li>
+                        <a href="#contact">
+                        Contact
+                    </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+
+            <!-- CATEGORIES -->
+
+            <div>
+
+                <h3>
+                    Categories
+                </h3>
+
+
+                <ul>
+
+                    <li>
+                        <a href="#articles">
+                        Artificial Intelligence
+                    </a>
+                    </li>
+
+                    <li>
+                        <a href="#articles">
+                        Web Development
+                    </a>
+                    </li>
+
+                    <li>
+                        <a href="#articles">
+                        Programming
+                    </a>
+                    </li>
+
+                    <li>
+                        <a href="#articles">
+                        Data Science
+                    </a>
+                    </li>
+
+                    <li>
+                        <a href="#articles">
+                        Education
+                    </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+
+            <!-- RESOURCES -->
+
+            <div>
+
+                <h3>
+                    Resources
+                </h3>
+
+
+                <ul>
+
+                    <li>
+                        <a href="#html-demo">
+                        HTML Guide
+                    </a>
+                    </li>
+
+                    <li>
+                        <a href="#python">
+                        Python
+                    </a>
+                    </li>
+
+                    <li>
+                        <a href="#article-ai">
+                        AI Guide
+                    </a>
+                    </li>
+
+                    <li>
+                        <a href="#contact">
+                        Support
+                    </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- COPYRIGHT -->
+
+        <div class="copyright">
+
+            <span>
+            © 2026 TechNova Media. All Rights Reserved.
+        </span>
+
+            <span>
+            Built with HTML • CSS • JavaScript
+        </span>
+
+        </div>
+
+
+    </footer>
+
+
+
+    <!-- =========================================================
+     BACK TO TOP
+========================================================== -->
+
+    <button class="top-button" id="topButton" onclick="scrollToTop()">
+
+    <i class="fa-solid fa-arrow-up"></i>
+
+</button>
+
+
+
+    <!-- =========================================================
+     JAVASCRIPT
+========================================================== -->
+
+    <script>
+        /* =====================================================
+               SEARCH
+            ====================================================== */
+
+        function openSearch() {
+
+            const query =
+                prompt(
+                    "🔎 Search TechNova articles:"
+                );
+
+
+            if (query) {
+
+                alert(
+                    "Searching for: " +
+                    query +
+                    "\n\nDemo search activated."
+                );
+
+            }
+
+        }
+
+
+        /* =====================================================
+           NOTIFICATION
+        ====================================================== */
+
+        function showMessage() {
+
+            alert(
+                "🔔 TechNova Notification\n\n" +
+                "You are viewing the latest technology stories!"
+            );
+
+        }
+
+
+        /* =====================================================
+           NEWSLETTER
+        ====================================================== */
+
+        function subscribe() {
+
+            const email =
+                document.getElementById(
+                    "email"
+                ).value;
+
+
+            if (email.trim() === "") {
+
+                alert(
+                    "⚠️ Please enter your email address."
+                );
+
+                return;
+
+            }
+
+
+            alert(
+                "🎉 Thank you!\n\n" +
+                email +
+                "\n\nhas been subscribed to TechNova."
+            );
+
+
+            document.getElementById(
+                "email"
+            ).value = "";
+
+        }
+
+
+        /* =====================================================
+           BACK TO TOP
+        ====================================================== */
+
+        const topButton =
+            document.getElementById(
+                "topButton"
+            );
+
+
+        window.addEventListener(
+            "scroll",
+            function() {
+
+                if (
+                    window.scrollY > 500
+                ) {
+
+                    topButton.classList.add(
+                        "show"
+                    );
+
+                } else {
+
+                    topButton.classList.remove(
+                        "show"
+                    );
+
+                }
+
+            }
+        );
+
+
+        function scrollToTop() {
+
+            window.scrollTo({
+
+                top: 0,
+
+                behavior: "smooth"
+
+            });
+
+        }
+
+
+        /* =====================================================
+           ACTIVE NAVIGATION
+        ====================================================== */
+
+        const navLinks =
+            document.querySelectorAll(
+                "nav a"
+            );
+
+
+        navLinks.forEach(
+            function(link) {
+
+                link.addEventListener(
+                    "click",
+                    function() {
+
+                        navLinks.forEach(
+                            function(item) {
+
+                                item.classList.remove(
+                                    "active"
+                                );
+
+                            }
+                        );
+
+
+                        this.classList.add(
+                            "active"
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           SIMPLE SCROLL ANIMATION
+        ====================================================== */
+
+        const cards =
+            document.querySelectorAll(
+                ".blog-card, .mini-post, .sidebar-card"
+            );
+
+
+        const observer =
+            new IntersectionObserver(
+                function(entries) {
+
+                    entries.forEach(
+                        function(entry) {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                entry.target.style.opacity =
+                                    "1";
+
+                                entry.target.style.transform =
+                                    "translateY(0)";
+
+                            }
+
+                        }
+                    );
+
+                }, {
+                    threshold: 0.1
+                }
+            );
+
+
+        cards.forEach(
+            function(card) {
+
+                card.style.opacity = "0";
+
+                card.style.transform =
+                    "translateY(20px)";
+
+                card.style.transition =
+                    "opacity .6s ease, transform .6s ease";
+
+                observer.observe(card);
+
+            }
+        );
+
+
+        /* =====================================================
+           CONSOLE MESSAGE
+        ====================================================== */
+
+        console.log(
+            "TechNova Blog loaded successfully 🚀"
+        );
+    </script>
+
+
+</body>
+
+</html>
+```
